@@ -6,7 +6,6 @@ from meetup.model import Session, UserModel
 
 session = Session()
 
-
 class User(graphene.ObjectType):
     id = ID()
     name = String()

@@ -6,7 +6,6 @@ from .query import User, Meetup
 
 session = Session()
 
-
 class CreateUser(graphene.Mutation):
     class Arguments:
         name = String()
