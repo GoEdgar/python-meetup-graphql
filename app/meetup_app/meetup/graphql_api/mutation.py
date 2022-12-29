@@ -10,7 +10,6 @@ session = Session()
 class CreateUser(graphene.Mutation):
     class Arguments:
         name = String()
-        username = String()
         email = String()
 
     user = Field(User)

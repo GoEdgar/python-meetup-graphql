@@ -1,7 +1,7 @@
 import graphene
 from graphene import ID, String, List, DateTime, Field, Argument, Int
 
-from meetup.dto import get_user_query, get_meetup_query
+from meetup.dao import get_user_query, get_meetup_query
 from meetup.model import Session, UserModel
 
 session = Session()
@@ -10,7 +10,6 @@ session = Session()
 class User(graphene.ObjectType):
     id = ID()
     name = String()
-    username = String()
     email = String()
 
 
