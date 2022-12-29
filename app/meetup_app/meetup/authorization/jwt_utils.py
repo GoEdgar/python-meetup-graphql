@@ -9,15 +9,12 @@ SECRET_KEY = "0425450f9bf5d74091813ef7d8ec7cc7"
 
 def get_user_id_from_token(token):
     try:
-        print(token, type(token))
         token_data = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-    except JWTError as e:
-        print(e)
+    except JWTError:
         raise CredentialCommonException
 
     user_id = token_data.get("sub")
     if user_id is None:
-        print("user id is empty")
         raise CredentialCommonException
 
     return user_id
