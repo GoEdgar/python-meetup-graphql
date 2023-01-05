@@ -1,7 +1,7 @@
 import graphene
 from graphene import String, Field, List, DateTime, Int
 
-from meetup.model import Session
+from meetup.model import Session, UserModel, MeetupModel
 from .query import User, Meetup
 
 session = Session()
@@ -10,16 +10,15 @@ session = Session()
 class CreateUser(graphene.Mutation):
     class Arguments:
         name = String()
-        username = String()
         email = String()
 
     user = Field(User)
 
     async def mutate(*_, **kwargs):
-        new_user = User(**kwargs)
+        new_user = UserModel(**kwargs)
         session.add(new_user)
         session.commit()
-        return new_user
+        return CreateUser(user=new_user)
 
 
 class CreateMeetup(graphene.Mutation):
@@ -34,11 +33,12 @@ class CreateMeetup(graphene.Mutation):
     meetup = Field(Meetup)
 
     async def mutate(*_, **kwargs):
-        new_meetup = Meetup(**kwargs)
+        new_meetup = MeetupModel(**kwargs)
         session.add(new_meetup)
         session.commit()
-        return new_meetup
+        return CreateMeetup(meetup=new_meetup)
 
 
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
+    create_meetup = CreateMeetup.Field()

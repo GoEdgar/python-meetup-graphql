@@ -26,8 +26,8 @@ class UserModel(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=True)
-    username = Column(String)
-    email = Column(String)
+    email = Column(String, unique=True)
+    password_hash = Column(String)
 
 
 class MeetupModel(Base):
